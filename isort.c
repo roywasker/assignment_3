@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "isort.h"
-#define sizeofarray 5
+#define sizeofarray 50
 
 void shift_element(int* arr, int i);
 void insertion_sort(int* arr , int len);
@@ -18,7 +18,7 @@ int main(){
         {
            printf("%d,",*(arr+i));
         }else{
-            printf("%d",*(arr+i));
+            printf("%d\n",*(arr+i));
         }
     }
     return 0;
