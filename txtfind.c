@@ -4,11 +4,11 @@
 #define LINE 256
 #define WORD 30
 
-int newgetlinen(char s[]);// look its work
+int newgetlinen(char s[]);
 int getword(char w[]); 
 int substring( char * str1, char * str2); 
 int similar (char *s, char *t, int n);
-void print_lines(char * str); // look its work
+void print_lines(char * str); 
 void print_similar_words(char * str); 
 
 int main(int argc, char** argv){
@@ -33,16 +33,13 @@ int main(int argc, char** argv){
 int newgetlinen(char s[]){
     for (size_t i = 0; i < LINE; i++)
     {
-        char ch='\0';
-        scanf("%c",&ch);
-        if (ch=='\n'||ch==EOF)
+        char ch=getc(stdin);
+        if (ch=='\n')
         {
             s[i]='\0';
             break;
-        }
-        else if (ch=='\r')
-        {
-            ch='\n';
+        }else if(ch==EOF){
+            return-1;
         }
         s[i]=ch;
     }
@@ -55,7 +52,7 @@ int getword(char w[]){
         ch=fgetc(stdin);
         if (ch==EOF)
         {
-            break;
+            return -1;
         }
         if(ch!='\n'&&ch!='\t'&&ch!=' ')
         {
@@ -131,13 +128,13 @@ int similar (char *s, char *t, int n){
 
 void print_lines(char * str){
     char line[LINE]={0};
-    int linelen=1;               
-    while(linelen>0){          
+    int linelen=1;            
+    while(linelen>=0){          
         memset(&line,0,sizeof(line));
         linelen=newgetlinen(line);
         if (substring(line,str)==1)
         {
-            printf("%s",line);
+            printf("%s\n",line);
         }
     }
 }
@@ -145,7 +142,7 @@ void print_lines(char * str){
 void print_similar_words(char * str){
     char word[WORD]={0};
     int wordlen=1;            
-    while(wordlen>0){          
+    while(wordlen>=0){          
         memset(&word,0,sizeof(word));
         wordlen=getword(word);
         if (similar(word,str,1)==1)
